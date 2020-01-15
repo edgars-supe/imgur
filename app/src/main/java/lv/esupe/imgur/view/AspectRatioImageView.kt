@@ -1,4 +1,4 @@
-package lv.esupe.imgur
+package lv.esupe.imgur.view
 
 import android.content.Context
 import android.util.AttributeSet
