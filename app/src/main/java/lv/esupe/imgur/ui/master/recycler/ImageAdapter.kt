@@ -1,11 +1,11 @@
-package lv.esupe.imgur.master.recycler
+package lv.esupe.imgur.ui.master.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import lv.esupe.imgur.R
-import lv.esupe.imgur.master.model.ImageItem
+import lv.esupe.imgur.ui.master.model.ImageItem
 
 class ImageAdapter(
     callback: ImageDiffCallback,

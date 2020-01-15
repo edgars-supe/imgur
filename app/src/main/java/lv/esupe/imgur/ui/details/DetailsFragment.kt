@@ -1,4 +1,4 @@
-package lv.esupe.imgur.details
+package lv.esupe.imgur.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater

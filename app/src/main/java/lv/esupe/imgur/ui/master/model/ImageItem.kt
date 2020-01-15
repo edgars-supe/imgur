@@ -1,4 +1,4 @@
-package lv.esupe.imgur.master.model
+package lv.esupe.imgur.ui.master.model
 
 data class ImageItem(
     val id: String,

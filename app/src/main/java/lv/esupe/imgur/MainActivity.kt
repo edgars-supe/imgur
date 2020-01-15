@@ -2,8 +2,8 @@ package lv.esupe.imgur
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import lv.esupe.imgur.details.DetailsFragment
-import lv.esupe.imgur.master.MasterFragment
+import lv.esupe.imgur.ui.details.DetailsFragment
+import lv.esupe.imgur.ui.master.MasterFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
 

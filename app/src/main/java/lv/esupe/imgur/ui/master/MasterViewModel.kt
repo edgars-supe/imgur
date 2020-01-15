@@ -1,4 +1,4 @@
-package lv.esupe.imgur.master
+package lv.esupe.imgur.ui.master
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import lv.esupe.imgur.data.GalleryRepo
-import lv.esupe.imgur.master.model.ImageItem
+import lv.esupe.imgur.ui.master.model.ImageItem
 import lv.esupe.imgur.model.Image
 import javax.inject.Inject
 
@@ -55,13 +55,9 @@ class MasterViewModel @Inject constructor(
             else -> id
         }
 
-        fun Image.getLink(): String {
-            return if (isAlbum) {
-                images.firstOrNull { it.id == cover }?.link ?: link
-            } else {
-                link
-            }
-        }
+        fun Image.getLink(): String =
+            if (isAlbum) images.firstOrNull { it.id == cover }?.link ?: link
+            else link
 
         return ImageItem(
             id = id,

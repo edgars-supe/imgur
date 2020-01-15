@@ -1,10 +1,10 @@
-package lv.esupe.imgur.master.recycler
+package lv.esupe.imgur.ui.master.recycler
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_image.view.*
-import lv.esupe.imgur.master.model.ImageItem
+import lv.esupe.imgur.ui.master.model.ImageItem
 
 class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(item: ImageItem) {

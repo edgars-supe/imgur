@@ -1,4 +1,4 @@
-package lv.esupe.imgur.master
+package lv.esupe.imgur.ui.master
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_master.*
 import kotlinx.android.synthetic.main.view_error.*
 import lv.esupe.imgur.R
-import lv.esupe.imgur.master.recycler.ImageAdapter
-import lv.esupe.imgur.master.recycler.ImageDiffCallback
+import lv.esupe.imgur.ui.master.recycler.ImageAdapter
+import lv.esupe.imgur.ui.master.recycler.ImageDiffCallback
 import lv.esupe.imgur.utils.component
 import lv.esupe.imgur.utils.viewModel
 

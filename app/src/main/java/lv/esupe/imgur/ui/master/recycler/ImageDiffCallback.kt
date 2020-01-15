@@ -1,7 +1,7 @@
-package lv.esupe.imgur.master.recycler
+package lv.esupe.imgur.ui.master.recycler
 
 import androidx.recyclerview.widget.DiffUtil
-import lv.esupe.imgur.master.model.ImageItem
+import lv.esupe.imgur.ui.master.model.ImageItem
 
 class ImageDiffCallback : DiffUtil.ItemCallback<ImageItem>() {
     override fun areItemsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean =

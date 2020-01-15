@@ -1,6 +1,6 @@
-package lv.esupe.imgur.master
+package lv.esupe.imgur.ui.master
 
-import lv.esupe.imgur.master.model.ImageItem
+import lv.esupe.imgur.ui.master.model.ImageItem
 
 sealed class MasterState {
     class Loading : MasterState()

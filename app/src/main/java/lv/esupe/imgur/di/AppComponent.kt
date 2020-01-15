@@ -3,8 +3,8 @@ package lv.esupe.imgur.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
-import lv.esupe.imgur.details.DetailsViewModel
-import lv.esupe.imgur.master.MasterViewModel
+import lv.esupe.imgur.ui.details.DetailsViewModel
+import lv.esupe.imgur.ui.master.MasterViewModel
 
 @Component(
     modules = [NetworkModule::class]
