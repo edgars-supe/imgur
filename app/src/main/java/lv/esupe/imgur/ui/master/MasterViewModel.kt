@@ -1,7 +1,7 @@
 package lv.esupe.imgur.ui.master
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 import lv.esupe.imgur.data.ImgurRepo
 import lv.esupe.imgur.model.Image
 import lv.esupe.imgur.ui.BaseViewModel
@@ -11,9 +11,10 @@ import javax.inject.Inject
 class MasterViewModel @Inject constructor(
     private val imgurRepo: ImgurRepo
 ) : BaseViewModel() {
-    val state: LiveData<MasterState>
+    val state: Observable<MasterState>
         get() = _state
-    private val _state: MutableLiveData<MasterState> = MutableLiveData(MasterState.Loading())
+    private val _state: BehaviorSubject<MasterState> =
+        BehaviorSubject.createDefault(MasterState.Loading())
     private val images: MutableList<Image> = mutableListOf()
 
     init {
@@ -24,7 +25,7 @@ class MasterViewModel @Inject constructor(
                     images.addAll(data.data)
                     onImagesLoaded()
                 },
-                { t -> _state.postValue(MasterState.Error(t.message ?: "err")) }
+                { t -> _state.onNext(MasterState.Error(t.message ?: "err")) }
             )
             .bindToViewModel()
     }
@@ -36,7 +37,7 @@ class MasterViewModel @Inject constructor(
     private fun onImagesLoaded() {
         val items = images.map { it.toImageItem() }
         val state = MasterState.Content(items)
-        _state.postValue(state)
+        _state.onNext(state)
     }
 
     private fun Image.toImageItem(): ImageItem {

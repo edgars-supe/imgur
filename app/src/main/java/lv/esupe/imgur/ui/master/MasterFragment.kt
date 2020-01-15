@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposables
 import kotlinx.android.synthetic.main.fragment_master.*
 import kotlinx.android.synthetic.main.view_error.*
 import lv.esupe.imgur.R
@@ -24,6 +25,7 @@ class MasterFragment : Fragment() {
 
     private val viewModel by viewModel { component().masterViewModel }
     private val adapter = ImageAdapter(ImageDiffCallback(), ::onImageClicked)
+    private var stateDisposable = Disposables.disposed()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,19 +35,28 @@ class MasterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.state.observe(this, getStateChangeObserver())
+        observeState()
         master_recycler.adapter = adapter
         master_recycler.layoutManager =
             LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun getStateChangeObserver(): Observer<MasterState> = Observer { state ->
-        toggleStateViews(state)
-        when (state) {
-            is MasterState.Loading -> onLoading()
-            is MasterState.Content -> onContent(state)
-            is MasterState.Error -> onError(state)
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        stateDisposable.dispose()
+    }
+
+    private fun observeState() {
+        stateDisposable = viewModel.state
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { state ->
+                toggleStateViews(state)
+                when (state) {
+                    is MasterState.Loading -> onLoading()
+                    is MasterState.Content -> onContent(state)
+                    is MasterState.Error -> onError(state)
+                }
+            }
     }
 
     private fun onLoading() {
