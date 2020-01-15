@@ -2,25 +2,22 @@ package lv.esupe.imgur.ui.master
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
 import lv.esupe.imgur.data.ImgurRepo
 import lv.esupe.imgur.model.Image
+import lv.esupe.imgur.ui.BaseViewModel
 import lv.esupe.imgur.ui.master.model.ImageItem
 import javax.inject.Inject
 
 class MasterViewModel @Inject constructor(
     private val imgurRepo: ImgurRepo
-) : ViewModel() {
+) : BaseViewModel() {
     val state: LiveData<MasterState>
         get() = _state
     private val _state: MutableLiveData<MasterState> = MutableLiveData(MasterState.Loading())
-    private var disposable: Disposable = Disposables.disposed()
     private val images: MutableList<Image> = mutableListOf()
 
     init {
-        disposable = imgurRepo.getGallery("hot")
+        imgurRepo.getGallery("hot")
             .subscribe(
                 { data ->
                     images.clear()
@@ -29,12 +26,7 @@ class MasterViewModel @Inject constructor(
                 },
                 { t -> _state.postValue(MasterState.Error(t.message ?: "err")) }
             )
-
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposable.dispose()
+            .bindToViewModel()
     }
 
     fun onImageClicked(position: Int) {
