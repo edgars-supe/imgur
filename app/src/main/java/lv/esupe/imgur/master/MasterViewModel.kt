@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import lv.esupe.imgur.data.GalleryRepo
+import lv.esupe.imgur.master.model.ImageItem
+import lv.esupe.imgur.model.Image
 import javax.inject.Inject
 
 class MasterViewModel @Inject constructor(
@@ -15,13 +17,15 @@ class MasterViewModel @Inject constructor(
         get() = _state
     private val _state: MutableLiveData<MasterState> = MutableLiveData(MasterState.Loading())
     private var disposable: Disposable = Disposables.disposed()
+    private val images: MutableList<Image> = mutableListOf()
 
     init {
         disposable = galleryRepo.getGallery("hot")
             .subscribe(
                 { data ->
-                    val state = MasterState.Content(data.data)
-                    _state.postValue(state)
+                    images.clear()
+                    images.addAll(data.data)
+                    onImagesLoaded()
                 },
                 { t -> _state.postValue(MasterState.Error(t.message ?: "err")) }
             )
@@ -31,5 +35,40 @@ class MasterViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         disposable.dispose()
+    }
+
+    fun onImageClicked(position: Int) {
+        // TODO
+    }
+
+    private fun onImagesLoaded() {
+        val items = images.map { it.toImageItem() }
+        val state = MasterState.Content(items)
+        _state.postValue(state)
+    }
+
+    private fun Image.toImageItem(): ImageItem {
+        fun Image.getTitle(): String = when {
+            title != null -> title
+            description != null -> description
+            isAlbum -> images.firstOrNull()?.getTitle() ?: id
+            else -> id
+        }
+
+        fun Image.getLink(): String {
+            return if (isAlbum) {
+                images.firstOrNull { it.id == cover }?.link ?: link
+            } else {
+                link
+            }
+        }
+
+        return ImageItem(
+            id = id,
+            title = getTitle(),
+            width = if (isAlbum) coverWidth else width,
+            height = if (isAlbum) coverHeight else height,
+            link = getLink()
+        )
     }
 }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="brand_primary">#85BF25</color>
+    <color name="brand_primary_light">#B8F25B</color>
+    <color name="brand_primary_dark">#528E00</color>
+    <color name="brand_accent">#171544</color>
+    <color name="brand_accent_light">#433B70</color>
+    <color name="brand_accent_dark">#00001E</color>
+    <color name="brand_secondary">#2E3035</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#808080</color>
+    <color name="grey_dark">#474A51</color>
 </resources>
