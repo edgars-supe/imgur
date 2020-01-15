@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
-import lv.esupe.imgur.data.GalleryRepo
-import lv.esupe.imgur.ui.master.model.ImageItem
+import lv.esupe.imgur.data.ImgurRepo
 import lv.esupe.imgur.model.Image
+import lv.esupe.imgur.ui.master.model.ImageItem
 import javax.inject.Inject
 
 class MasterViewModel @Inject constructor(
-    private val galleryRepo: GalleryRepo
+    private val imgurRepo: ImgurRepo
 ) : ViewModel() {
     val state: LiveData<MasterState>
         get() = _state
@@ -20,7 +20,7 @@ class MasterViewModel @Inject constructor(
     private val images: MutableList<Image> = mutableListOf()
 
     init {
-        disposable = galleryRepo.getGallery("hot")
+        disposable = imgurRepo.getGallery("hot")
             .subscribe(
                 { data ->
                     images.clear()

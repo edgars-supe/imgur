@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 
-interface GalleryService {
+interface ImgurService {
     @GET("gallery/{section}")
     fun getGallery(@Path("section") section: String): Single<DataList<Image>>
 }
