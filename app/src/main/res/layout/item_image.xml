@@ -4,31 +4,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="4dp"
+    android:layout_marginStart="@dimen/spacing_mini"
+    android:layout_marginTop="@dimen/spacing_micro"
+    android:layout_marginEnd="@dimen/spacing_mini"
+    android:layout_marginBottom="@dimen/spacing_micro"
     app:cardBackgroundColor="@color/grey_dark"
+    app:cardCornerRadius="@dimen/item_image_card_corner_radius"
     >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="?selectableItemBackground"
         >
 
-        <lv.esupe.imgur.view.AspectRatioImageView
+        <ImageView
             android:id="@+id/image_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
+            android:layout_width="@dimen/item_image_thumbnail_size"
+            android:layout_height="@dimen/item_image_thumbnail_size"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:contentDescription="@string/item_image_content_desc"
+            android:scaleType="fitCenter"
             />
 
         <TextView
             android:id="@+id/image_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_mini"
+            android:layout_toEndOf="@id/image_container"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="?textAppearanceBody1"
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

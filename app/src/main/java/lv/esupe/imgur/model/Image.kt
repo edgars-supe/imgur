@@ -52,4 +52,17 @@ data class Image(
      * List of images contained in an album. Not present on images.
      */
     val images: List<Image> = emptyList()
-)
+) {
+
+    /**
+     * Returns a link to a small thumbnail of the image or album cover.
+     */
+    val thumbnail: String
+        get() =
+            if (isAlbum) {
+                images.first { it.id == cover }.thumbnail
+            } else {
+                val idx = link.lastIndexOf('.')
+                link.take(idx) + "s" + link.drop(idx)
+            }
+}

@@ -53,16 +53,12 @@ class MasterViewModel @Inject constructor(
             else -> id
         }
 
-        fun Image.getLink(): String =
-            if (isAlbum) images.firstOrNull { it.id == cover }?.link ?: link
-            else link
-
         return ImageItem(
             id = id,
             title = getTitle(),
             width = if (isAlbum) coverWidth else width,
             height = if (isAlbum) coverHeight else height,
-            link = getLink()
+            link = thumbnail
         )
     }
 }
