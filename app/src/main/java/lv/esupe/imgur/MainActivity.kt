@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity(), Navigator {
     override fun showDetails(id: String) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, DetailsFragment.newInstance())
-            .addToBackStack(null)
-            .commitNow()
+            .addToBackStack(id)
+            .commit()
     }
 
     override fun returnToMaster() {

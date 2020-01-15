@@ -11,6 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposables
 import kotlinx.android.synthetic.main.fragment_master.*
 import kotlinx.android.synthetic.main.view_error.*
+import lv.esupe.imgur.Navigator
 import lv.esupe.imgur.R
 import lv.esupe.imgur.ui.master.recycler.ImageAdapter
 import lv.esupe.imgur.ui.master.recycler.ImageDiffCallback
@@ -26,6 +27,7 @@ class MasterFragment : Fragment() {
     private val viewModel by viewModel { component().masterViewModel }
     private val adapter = ImageAdapter(ImageDiffCallback(), ::onImageClicked)
     private var stateDisposable = Disposables.disposed()
+    private var eventDisposable = Disposables.disposed()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +38,7 @@ class MasterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeState()
+        observeEvents()
         master_recycler.adapter = adapter
         master_recycler.layoutManager =
             LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
@@ -44,19 +47,32 @@ class MasterFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         stateDisposable.dispose()
+        eventDisposable.dispose()
+    }
+
+    private fun onImageClicked(position: Int) {
+        viewModel.onImageClicked(position)
     }
 
     private fun observeState() {
         stateDisposable = viewModel.state
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { state ->
-                toggleStateViews(state)
-                when (state) {
-                    is MasterState.Loading -> onLoading()
-                    is MasterState.Content -> onContent(state)
-                    is MasterState.Error -> onError(state)
-                }
-            }
+            .subscribe { state -> onStateChanged(state) }
+    }
+
+    private fun onStateChanged(state: MasterState) {
+        toggleStateViews(state)
+        when (state) {
+            is MasterState.Loading -> onLoading()
+            is MasterState.Content -> onContent(state)
+            is MasterState.Error -> onError(state)
+        }
+    }
+
+    private fun toggleStateViews(state: MasterState) {
+        master_progress_bar.isVisible = state is MasterState.Loading
+        master_recycler.isVisible = state is MasterState.Content
+        master_error_stub.isVisible = state is MasterState.Error
     }
 
     private fun onLoading() {
@@ -73,13 +89,15 @@ class MasterFragment : Fragment() {
         error_text.text = state.message
     }
 
-    private fun toggleStateViews(state: MasterState) {
-        master_progress_bar.isVisible = state is MasterState.Loading
-        master_recycler.isVisible = state is MasterState.Content
-        master_error_stub.isVisible = state is MasterState.Error
+    private fun observeEvents() {
+        eventDisposable = viewModel.events
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event -> onEventReceived(event) }
     }
 
-    private fun onImageClicked(position: Int) {
-        viewModel.onImageClicked(position)
+    private fun onEventReceived(event: MasterEvent) {
+        when (event) {
+            is MasterEvent.ShowImage -> (activity as? Navigator)?.showDetails(event.id)
+        }
     }
 }

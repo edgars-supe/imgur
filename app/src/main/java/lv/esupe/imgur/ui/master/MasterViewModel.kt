@@ -2,6 +2,7 @@ package lv.esupe.imgur.ui.master
 
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import lv.esupe.imgur.data.ImgurRepo
 import lv.esupe.imgur.model.Image
 import lv.esupe.imgur.ui.BaseViewModel
@@ -13,8 +14,11 @@ class MasterViewModel @Inject constructor(
 ) : BaseViewModel() {
     val state: Observable<MasterState>
         get() = _state
+    val events: Observable<MasterEvent>
+        get() = _events
     private val _state: BehaviorSubject<MasterState> =
         BehaviorSubject.createDefault(MasterState.Loading())
+    private val _events: PublishSubject<MasterEvent> = PublishSubject.create()
     private val images: MutableList<Image> = mutableListOf()
 
     init {
@@ -31,7 +35,8 @@ class MasterViewModel @Inject constructor(
     }
 
     fun onImageClicked(position: Int) {
-        // TODO
+        val image = images[position]
+        _events.onNext(MasterEvent.ShowImage(image.id))
     }
 
     private fun onImagesLoaded() {
