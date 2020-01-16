@@ -89,15 +89,7 @@ sealed class ImgurItem(
         /**
          * ID of the cover image for an album.
          */
-        val cover: String? = null,
-        /**
-         * Width of the cover image for an album.
-         */
-        val coverWidth: Int = 0,
-        /**
-         * Height of the cover image for an album.
-         */
-        val coverHeight: Int = 0,
+        val cover: String?,
         /**
          * List of images contained in an album.
          */

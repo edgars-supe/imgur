@@ -36,8 +36,6 @@ data class RawImgurItem(
             favorites = favorites ?: 0,
             views = views ?: 0,
             cover = cover,
-            coverWidth = coverWidth,
-            coverHeight = coverHeight,
             images = modelImages
         )
     }
