@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 sealed class ImgurItem(
     val isImage: Boolean = false,
-    val isAlbum: Boolean = true
+    val isAlbum: Boolean = false
 ) : Parcelable {
     abstract val id: String
     abstract val title: String?

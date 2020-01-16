@@ -74,7 +74,9 @@ class MasterViewModel @Inject constructor(
         return ImgurListItem(
             id = id,
             title = getTitle(),
-            link = thumbnail
+            link = thumbnail,
+            isAlbum = isAlbum,
+            albumSize = (this as? ImgurItem.Album)?.images?.size ?: 0
         )
     }
 }

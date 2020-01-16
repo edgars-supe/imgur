@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/spacing_mini"
@@ -25,6 +26,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/spacing_mini"
             android:contentDescription="@string/item_image_content_desc"
             android:scaleType="fitCenter"
             />
@@ -34,11 +36,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/spacing_mini"
+            android:layout_marginEnd="@dimen/spacing_mini"
+            android:layout_toStartOf="@id/item_icon"
             android:layout_toEndOf="@id/image_container"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="?textAppearanceBody1"
+            tools:text="Title of image"
+            />
+
+        <ImageView
+            android:id="@+id/item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/item_album_size"
+            tools:src="@drawable/ic_album"
+            />
+
+        <TextView
+            android:id="@+id/item_album_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_micro"
+            android:layout_marginEnd="@dimen/spacing_mini"
+            android:gravity="center"
+            tools:text="12"
             />
 
     </RelativeLayout>

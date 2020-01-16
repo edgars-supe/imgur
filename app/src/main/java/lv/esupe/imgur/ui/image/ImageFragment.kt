@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import lv.esupe.imgur.R
-import lv.esupe.imgur.ui.album.AlbumFragment
 import lv.esupe.imgur.utils.component
 import lv.esupe.imgur.utils.viewModel
 
 class ImageFragment : Fragment() {
 
     companion object {
-        fun newInstance() = AlbumFragment()
+        fun newInstance() = ImageFragment()
     }
 
     private val viewModel by viewModel { component().imageViewModel }
