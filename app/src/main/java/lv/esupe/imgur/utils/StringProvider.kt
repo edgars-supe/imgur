@@ -9,5 +9,5 @@ class StringProvider @Inject constructor(
 ) {
     fun getString(@StringRes resId: Int): String = context.getString(resId)
 
-    fun getString(@StringRes resId: Int, vararg params: Any) = context.getString(resId, params)
+    fun getString(@StringRes resId: Int, vararg params: Any) = context.getString(resId, *params)
 }

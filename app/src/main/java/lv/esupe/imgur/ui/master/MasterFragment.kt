@@ -85,6 +85,7 @@ class MasterFragment : Fragment() {
     }
 
     private fun onContent(state: MasterState.Content) {
+        toolbarController.setTitle(state.title)
         adapter.submitList(state.images)
     }
 

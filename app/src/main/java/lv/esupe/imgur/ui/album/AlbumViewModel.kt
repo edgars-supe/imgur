@@ -5,6 +5,7 @@ import io.reactivex.subjects.BehaviorSubject
 import lv.esupe.imgur.R
 import lv.esupe.imgur.model.ImgurItem
 import lv.esupe.imgur.ui.BaseViewModel
+import lv.esupe.imgur.ui.album.model.AlbumImage
 import lv.esupe.imgur.utils.StringProvider
 import javax.inject.Inject
 
@@ -34,7 +35,7 @@ class AlbumViewModel @Inject constructor(
             views = album.views,
             favorites = album.favorites,
             coverLink = album.coverLink,
-            images = album.images
+            images = album.images.map { AlbumImage(it.link) }
         )
         _state.onNext(state)
     }

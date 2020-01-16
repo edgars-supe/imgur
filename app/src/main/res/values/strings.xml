@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Imgur</string>
 
+    <string name="section_hot">Hot</string>
+
+    <string name="master_title">Imgur - %1$s</string>
+
     <string name="error_image_content_desc">Error image</string>
     <string name="item_image_content_desc">An Imgur image</string>
 
     <string name="album_untitled">Untitled</string>
+    <string name="album_image_content_desc">An album\'s image</string>
 </resources>

@@ -4,8 +4,11 @@ import lv.esupe.imgur.model.ImgurItem
 import lv.esupe.imgur.ui.master.model.ImgurListItem
 
 sealed class MasterState {
-    class Loading : MasterState()
-    class Content(val images: List<ImgurListItem>) : MasterState()
+    class Loading(val title: String) : MasterState()
+    class Content(
+        val title: String,
+        val images: List<ImgurListItem>
+    ) : MasterState()
     class Error(val message: String) : MasterState()
 }
 

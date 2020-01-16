@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(), Navigator, ToolbarController {
     }
 
     override fun showAlbum(album: ImgurItem.Album) {
+        main_app_bar.setExpanded(true, true)
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, AlbumFragment.newInstance(album))
             .addToBackStack(album.id)
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), Navigator, ToolbarController {
     }
 
     override fun returnToMaster() {
+        main_app_bar.setExpanded(true, true)
         supportFragmentManager.popBackStack()
     }
 
