@@ -97,7 +97,7 @@ class MasterFragment : Fragment() {
 
     private fun onEventReceived(event: MasterEvent) {
         when (event) {
-            is MasterEvent.ShowImage -> (activity as? Navigator)?.showDetails(event.id)
+            is MasterEvent.ShowImage -> (activity as? Navigator)?.showImage(event.id)
         }
     }
 }

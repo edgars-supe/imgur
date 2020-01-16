@@ -3,7 +3,8 @@ package lv.esupe.imgur
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.main_activity.*
-import lv.esupe.imgur.ui.details.DetailsFragment
+import lv.esupe.imgur.ui.album.AlbumFragment
+import lv.esupe.imgur.ui.image.ImageFragment
 import lv.esupe.imgur.ui.master.MasterFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
@@ -19,9 +20,16 @@ class MainActivity : AppCompatActivity(), Navigator {
         }
     }
 
-    override fun showDetails(id: String) {
+    override fun showImage(id: String) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, DetailsFragment.newInstance())
+            .replace(R.id.main_container, ImageFragment.newInstance())
+            .addToBackStack(id)
+            .commit()
+    }
+
+    override fun showAlbum(id: String) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, AlbumFragment.newInstance())
             .addToBackStack(id)
             .commit()
     }
