@@ -5,6 +5,7 @@ import lv.esupe.imgur.ui.album.model.AlbumImage
 
 data class AlbumState(
     val title: String,
+    val description: String?,
     val author: String,
     val upvotes: Int,
     val downvotes: Int,

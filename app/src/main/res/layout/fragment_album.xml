@@ -82,6 +82,14 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/album_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_mini"
+                android:textAppearance="?textAppearanceBody2"
+                />
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

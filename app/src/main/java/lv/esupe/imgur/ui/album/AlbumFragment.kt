@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -71,6 +72,8 @@ class AlbumFragment : Fragment() {
 
     private fun onStateChanged(state: AlbumState) {
         toolbarController.setTitle(state.title)
+        album_description.isVisible = !state.description.isNullOrBlank()
+        album_description.text = state.description
         album_author.text = state.author
         album_upvotes.text = state.upvotes.toString()
         album_downvotes.text = state.downvotes.toString()

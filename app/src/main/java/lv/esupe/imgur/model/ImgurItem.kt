@@ -9,13 +9,14 @@ sealed class ImgurItem(
 ) : Parcelable {
     abstract val id: String
     abstract val title: String?
+    abstract val description: String?
     abstract val thumbnail: String
 
     /**
      * Represents an image on Imgur.
      */
     @Parcelize
-    class Image(
+    data class Image(
         /**
          * ID of the image.
          */
@@ -27,7 +28,7 @@ sealed class ImgurItem(
         /**
          * Description of the image. Optional.
          */
-        val description: String? = null,
+        override val description: String? = null,
         /**
          * Width of the image.
          */
@@ -52,15 +53,19 @@ sealed class ImgurItem(
      * Represents an album on Imgur.
      */
     @Parcelize
-    class Album(
+    data class Album(
         /**
          * ID of the album.
          */
         override val id: String,
         /**
-         * Title of the image album. Optional.
+         * Title of the album. Optional.
          */
         override val title: String? = null,
+        /**
+         * Description of the album. Optional.
+         */
+        override val description: String? = null,
         /**
          * Name of the author of the album.
          */

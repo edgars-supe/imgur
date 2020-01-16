@@ -40,6 +40,7 @@ class AlbumViewModel @Inject constructor(
         this.album = album
         val state = AlbumState(
             title = album.title ?: stringProvider.getString(R.string.untitled),
+            description = album.description,
             author = album.author,
             upvotes = album.upvotes,
             downvotes = album.downvotes,
