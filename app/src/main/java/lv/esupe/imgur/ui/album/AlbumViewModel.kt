@@ -2,6 +2,7 @@ package lv.esupe.imgur.ui.album
 
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import lv.esupe.imgur.R
 import lv.esupe.imgur.model.ImgurItem
 import lv.esupe.imgur.ui.BaseViewModel
@@ -15,8 +16,12 @@ class AlbumViewModel @Inject constructor(
 
     val state: Observable<AlbumState>
         get() = _state
+    val events: Observable<AlbumEvent>
+        get() = _events
     private val _state: BehaviorSubject<AlbumState> = BehaviorSubject.create()
+    private val _events: PublishSubject<AlbumEvent> = PublishSubject.create()
     private var isInitialized: Boolean = false
+    private lateinit var album: ImgurItem.Album
 
     fun init(album: ImgurItem.Album) {
         if (isInitialized) return
@@ -26,7 +31,13 @@ class AlbumViewModel @Inject constructor(
         }
     }
 
+    fun onItemClicked(position: Int) {
+        val image = album.images[position]
+        _events.onNext(AlbumEvent.ShowImage(image))
+    }
+
     private fun onAlbumSet(album: ImgurItem.Album) {
+        this.album = album
         val state = AlbumState(
             title = album.title ?: stringProvider.getString(R.string.album_untitled),
             author = album.author,

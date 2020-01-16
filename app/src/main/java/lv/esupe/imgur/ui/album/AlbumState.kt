@@ -1,5 +1,6 @@
 package lv.esupe.imgur.ui.album
 
+import lv.esupe.imgur.model.ImgurItem
 import lv.esupe.imgur.ui.album.model.AlbumImage
 
 data class AlbumState(
@@ -12,3 +13,7 @@ data class AlbumState(
     val coverLink: String,
     val images: List<AlbumImage>
 )
+
+sealed class AlbumEvent {
+    class ShowImage(val image: ImgurItem.Image) : AlbumEvent()
+}

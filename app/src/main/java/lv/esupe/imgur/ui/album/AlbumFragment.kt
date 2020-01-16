@@ -12,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import kotlinx.android.synthetic.main.fragment_album.*
+import lv.esupe.imgur.Navigator
 import lv.esupe.imgur.R
 import lv.esupe.imgur.model.ImgurItem
 import lv.esupe.imgur.ui.album.recycler.AlbumImageAdapter
@@ -34,6 +35,7 @@ class AlbumFragment : Fragment() {
 
     private val viewModel by viewModel { component().albumViewModel }
     private var stateDisposable: Disposable = Disposables.disposed()
+    private var eventDisposable: Disposable = Disposables.disposed()
     private val adapter = AlbumImageAdapter(AlbumImageDiffCallback(), ::onItemClicked)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,6 +60,7 @@ class AlbumFragment : Fragment() {
         album_images.addItemDecoration(SpacingItemDecoration(spacing))
         viewModel.init(album)
         observeState()
+        observeEvents()
     }
 
     private fun observeState() {
@@ -76,8 +79,20 @@ class AlbumFragment : Fragment() {
         adapter.submitList(state.images)
     }
 
-    private fun onItemClicked(position: Int) {
+    private fun observeEvents() {
+        eventDisposable = viewModel.events
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event -> onEventReceived(event) }
+    }
 
+    private fun onEventReceived(event: AlbumEvent) {
+        when (event) {
+            is AlbumEvent.ShowImage -> (activity as? Navigator)?.showImage(event.image)
+        }
+    }
+
+    private fun onItemClicked(position: Int) {
+        viewModel.onItemClicked(position)
     }
 
     private fun getSpanCount(): Int {
