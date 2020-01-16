@@ -40,12 +40,13 @@ sealed class ImgurItem(
         /**
          * Link to the image.
          */
-        val link: String
+        val link: String = ""
     ) : ImgurItem(isImage = true) {
         override val thumbnail: String
             get() {
                 val idx = link.lastIndexOf('.')
-                return link.take(idx) + "s" + link.drop(idx)
+                return if (idx < 0) link
+                else link.take(idx) + "s" + link.drop(idx)
             }
     }
 
@@ -69,27 +70,27 @@ sealed class ImgurItem(
         /**
          * Name of the author of the album.
          */
-        val author: String,
+        val author: String = "",
         /**
          * Number of upvotes this album has received.
          */
-        val upvotes: Int,
+        val upvotes: Int = 0,
         /**
          * Number of downvotes this album has received.
          */
-        val downvotes: Int,
+        val downvotes: Int = 0,
         /**
          * Number of times this album has been favorited.
          */
-        val favorites: Int,
+        val favorites: Int = 0,
         /**
          * Number of times this album has been viewed.
          */
-        val views: Int,
+        val views: Int = 0,
         /**
          * ID of the cover image for an album.
          */
-        val cover: String?,
+        val cover: String? = null,
         /**
          * List of images contained in an album.
          */
