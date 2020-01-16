@@ -8,7 +8,7 @@ import lv.esupe.imgur.ui.image.ImageViewModel
 import lv.esupe.imgur.ui.master.MasterViewModel
 
 @Component(
-    modules = [NetworkModule::class]
+    modules = [NetworkModule::class, RetrofitModule::class]
 )
 interface AppComponent {
     val masterViewModel: MasterViewModel
