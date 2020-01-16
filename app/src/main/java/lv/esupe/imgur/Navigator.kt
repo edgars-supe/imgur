@@ -1,7 +1,9 @@
 package lv.esupe.imgur
 
+import lv.esupe.imgur.model.Image
+
 interface Navigator {
-    fun showImage(id: String)
-    fun showAlbum(id: String)
+    fun showImage(image: Image)
+    fun showAlbum(image: Image)
     fun returnToMaster()
 }

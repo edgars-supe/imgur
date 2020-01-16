@@ -36,7 +36,7 @@ class MasterViewModel @Inject constructor(
 
     fun onImageClicked(position: Int) {
         val image = images[position]
-        _events.onNext(MasterEvent.ShowImage(image.id))
+        _events.onNext(MasterEvent.ShowImage(image))
     }
 
     private fun onImagesLoaded() {

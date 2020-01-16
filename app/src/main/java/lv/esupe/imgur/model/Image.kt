@@ -1,5 +1,7 @@
 package lv.esupe.imgur.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -7,6 +9,7 @@ import kotlinx.serialization.Serializable
  * Represents an Image or Album entity on Imgur.
  */
 @Serializable
+@Parcelize
 data class Image(
     /**
      * ID of the image or album.
@@ -52,7 +55,7 @@ data class Image(
      * List of images contained in an album. Not present on images.
      */
     val images: List<Image> = emptyList()
-) {
+) : Parcelable {
 
     /**
      * Returns a link to a small thumbnail of the image or album cover.

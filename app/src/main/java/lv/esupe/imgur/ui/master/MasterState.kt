@@ -1,5 +1,6 @@
 package lv.esupe.imgur.ui.master
 
+import lv.esupe.imgur.model.Image
 import lv.esupe.imgur.ui.master.model.ImageItem
 
 sealed class MasterState {
@@ -9,5 +10,5 @@ sealed class MasterState {
 }
 
 sealed class MasterEvent {
-    class ShowImage(val id: String) : MasterEvent()
+    class ShowImage(val image: Image) : MasterEvent()
 }
