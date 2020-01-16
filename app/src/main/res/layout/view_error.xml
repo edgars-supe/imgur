@@ -12,7 +12,6 @@
         android:id="@+id/error_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/error_image_content_desc"
         android:src="@drawable/ic_alert"
         />
 

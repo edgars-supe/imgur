@@ -17,16 +17,16 @@ class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private fun loadImage(link: String) {
         Glide.with(itemView)
             .load(link)
-            .into(itemView.image_container)
+            .into(itemView.item_imgur_image)
     }
 
     private fun setTitle(title: String) {
-        itemView.image_title.text = title
+        itemView.item_imgur_title.text = title
     }
 
     private fun setUpIcon(isAlbum: Boolean, albumSize: Int) {
         val icon = if (isAlbum) R.drawable.ic_album else R.drawable.ic_image
-        itemView.item_icon.setImageResource(icon)
-        itemView.item_album_size.text = if (isAlbum) albumSize.toString() else ""
+        itemView.item_imgur_icon.setImageResource(icon)
+        itemView.item_imgur_album_size.text = if (isAlbum) albumSize.toString() else ""
     }
 }

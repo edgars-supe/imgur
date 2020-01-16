@@ -27,10 +27,7 @@ class MainActivity : AppCompatActivity(), Navigator, ToolbarController {
     }
 
     override fun showImage(image: ImgurItem.Image) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, ImageFragment.newInstance())
-            .addToBackStack(image.id)
-            .commit()
+        ImageFragment.newInstance(image).show(supportFragmentManager, null)
     }
 
     override fun showAlbum(album: ImgurItem.Album) {

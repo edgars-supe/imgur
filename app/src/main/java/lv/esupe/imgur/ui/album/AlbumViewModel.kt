@@ -39,7 +39,7 @@ class AlbumViewModel @Inject constructor(
     private fun onAlbumSet(album: ImgurItem.Album) {
         this.album = album
         val state = AlbumState(
-            title = album.title ?: stringProvider.getString(R.string.album_untitled),
+            title = album.title ?: stringProvider.getString(R.string.untitled),
             author = album.author,
             upvotes = album.upvotes,
             downvotes = album.downvotes,

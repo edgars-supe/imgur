@@ -10,4 +10,11 @@
         <item name="android:drawablePadding">@dimen/spacing_micro</item>
         <item name="android:layout_marginStart">@dimen/spacing_mini</item>
     </style>
+
+    <style name="Image.Text" parent="">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_marginStart">@dimen/spacing_mini</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_mini</item>
+        <item name="android:layout_marginTop">@dimen/spacing_mini</item>
+    </style>
 </resources>

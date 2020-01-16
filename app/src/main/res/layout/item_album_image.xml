@@ -13,7 +13,6 @@
         android:layout_width="@dimen/album_image_size"
         android:layout_height="@dimen/album_image_size"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/album_image_content_desc"
         />
 
 </androidx.cardview.widget.CardView>

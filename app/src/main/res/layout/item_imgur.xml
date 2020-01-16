@@ -20,25 +20,24 @@
         >
 
         <ImageView
-            android:id="@+id/image_container"
+            android:id="@+id/item_imgur_image"
             android:layout_width="@dimen/item_image_thumbnail_size"
             android:layout_height="@dimen/item_image_thumbnail_size"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/spacing_mini"
-            android:contentDescription="@string/item_image_content_desc"
             android:scaleType="fitCenter"
             />
 
         <TextView
-            android:id="@+id/image_title"
+            android:id="@+id/item_imgur_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/spacing_mini"
-            android:layout_toStartOf="@id/item_icon"
-            android:layout_toEndOf="@id/image_container"
+            android:layout_toStartOf="@id/item_imgur_icon"
+            android:layout_toEndOf="@id/item_imgur_image"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="?textAppearanceBody1"
@@ -46,16 +45,16 @@
             />
 
         <ImageView
-            android:id="@+id/item_icon"
+            android:id="@+id/item_imgur_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/item_album_size"
+            android:layout_toStartOf="@id/item_imgur_album_size"
             tools:src="@drawable/ic_album"
             />
 
         <TextView
-            android:id="@+id/item_album_size"
+            android:id="@+id/item_imgur_album_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
