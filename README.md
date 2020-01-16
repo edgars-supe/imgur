@@ -4,7 +4,7 @@ This is a very simple Imgur app that pulls in the first page of Imgur's "hot" ga
 
 ## Architecture
 
-The View portion uses an MVVM architecture, using Fragments and Jetpack's ViewModels. It's a single-activity app. All communication is done with RxJava (network calls, repo to ViewModel, View observes state from ViewModel, etc.). Json is parsed using `kotlinx.serialization`.
+The View portion uses an MVVM architecture, using Fragments and Jetpack's ViewModels. It's a single-activity app. All communication is done with RxJava (network calls, repo to ViewModel, View observes state from ViewModel, etc.). Json is parsed using `kotlinx.serialization`. There are also a couple of basic unit tests with JUnit.
 
 ## Structure
 
