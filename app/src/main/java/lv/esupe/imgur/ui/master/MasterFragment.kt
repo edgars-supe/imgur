@@ -78,7 +78,7 @@ class MasterFragment : Fragment() {
     private fun toggleStateViews(state: MasterState) {
         master_progress_bar.isVisible = state is MasterState.Loading
         master_recycler.isVisible = state is MasterState.Content
-        master_error_stub.isVisible = state is MasterState.Error
+        error_root.isVisible = state is MasterState.Error
     }
 
     private fun onLoading() {
@@ -90,10 +90,8 @@ class MasterFragment : Fragment() {
     }
 
     private fun onError(state: MasterState.Error) {
-        if (view?.findViewById<View>(R.id.master_error_stub) != null) {
-            master_error_stub.inflate()
-        }
         error_text.text = state.message
+        error_try_again.setOnClickListener { viewModel.onTryAgainClicked() }
     }
 
     private fun observeEvents() {

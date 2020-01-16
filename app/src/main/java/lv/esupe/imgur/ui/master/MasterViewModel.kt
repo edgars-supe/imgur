@@ -1,8 +1,10 @@
 package lv.esupe.imgur.ui.master
 
+import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
+import kotlinx.io.IOException
 import lv.esupe.imgur.R
 import lv.esupe.imgur.data.ImgurRepo
 import lv.esupe.imgur.model.ImgurItem
@@ -45,6 +47,10 @@ class MasterViewModel @Inject constructor(
         _events.onNext(event)
     }
 
+    fun onTryAgainClicked() {
+        loadGallery()
+    }
+
     private fun loadGallery() {
         imgurRepo.getGallery(section)
             .subscribe(
@@ -54,11 +60,18 @@ class MasterViewModel @Inject constructor(
                     onImagesLoaded()
                 },
                 { t ->
-                    val message = t.message ?: stringProvider.getString(R.string.unknown_error)
-                    _state.onNext(MasterState.Error(message))
+                    onError(t)
                 }
             )
             .bindToViewModel()
+    }
+
+    private fun onError(t: Throwable) {
+        Log.e("MasterViewModel", t.message, t)
+        val message =
+            if (t is IOException) stringProvider.getString(R.string.network_error)
+            else stringProvider.getString(R.string.unknown_error)
+        _state.onNext(MasterState.Error(message))
     }
 
     private fun onImagesLoaded() {

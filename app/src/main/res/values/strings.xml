@@ -3,5 +3,7 @@
     <string name="untitled">Untitled</string>
     <string name="section_hot">Hot</string>
     <string name="master_title">Imgur - %1$s</string>
-    <string name="unknown_error">An unknown error occured!</string>
+    <string name="network_error">Something went wrong while loading data! Make sure you are connected to the Internet and try again.</string>
+    <string name="unknown_error">An unknown error occurred!</string>
+    <string name="try_again">Try again!</string>
 </resources>
