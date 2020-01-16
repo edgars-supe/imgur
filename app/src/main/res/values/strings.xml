@@ -3,4 +3,5 @@
     <string name="untitled">Untitled</string>
     <string name="section_hot">Hot</string>
     <string name="master_title">Imgur - %1$s</string>
+    <string name="unknown_error">An unknown error occured!</string>
 </resources>

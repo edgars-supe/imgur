@@ -4,6 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import lv.esupe.imgur.model.ImgurItem
 
+/**
+ * This class is used to parse album and image info from the Imgur API. It contains fields for both
+ * types, because the structures are very similar and the main object list in a gallery can contain
+ * both simultaneously.
+ */
 @Serializable
 data class RawImgurItem(
     val id: String,

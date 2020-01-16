@@ -52,16 +52,20 @@ class AlbumFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val spacing = resources.getDimensionPixelSize(R.dimen.spacing_mini)
-        album_images.layoutManager =
-            GridLayoutManager(view.context, getSpanCount(), GridLayoutManager.VERTICAL, false)
-        album_images.adapter = adapter
+        setUpRecycler()
         val album = arguments?.getParcelable<ImgurItem.Album>(EXTRA_ALBUM)
             ?: error("Couldn't read album")
-        album_images.addItemDecoration(SpacingItemDecoration(spacing))
         viewModel.init(album)
         observeState()
         observeEvents()
+    }
+
+    private fun setUpRecycler() {
+        val spacing = resources.getDimensionPixelSize(R.dimen.spacing_mini)
+        album_images.layoutManager =
+            GridLayoutManager(requireContext(), getSpanCount(), GridLayoutManager.VERTICAL, false)
+        album_images.adapter = adapter
+        album_images.addItemDecoration(SpacingItemDecoration(spacing))
     }
 
     private fun observeState() {

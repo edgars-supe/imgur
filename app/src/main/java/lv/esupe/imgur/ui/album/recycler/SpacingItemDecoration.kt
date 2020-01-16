@@ -6,6 +6,12 @@ import androidx.annotation.Dimension
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * This item decoration ensures even distribution of spacing in a grid of items. For example,
+ * the top row will have full spacing on top (as specified by [spacing]), but items in the rows
+ * below will only have half the spacing added, because the bottom spacing from the above items will
+ * serve as the other half of the top spacing.
+ */
 class SpacingItemDecoration(@Dimension var spacing: Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(

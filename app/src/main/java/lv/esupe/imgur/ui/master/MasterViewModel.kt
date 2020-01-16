@@ -34,7 +34,7 @@ class MasterViewModel @Inject constructor(
 
     init {
         _state.onNext(MasterState.Loading(title))
-        loadSection()
+        loadGallery()
     }
 
     fun onItemClicked(position: Int) {
@@ -45,7 +45,7 @@ class MasterViewModel @Inject constructor(
         _events.onNext(event)
     }
 
-    private fun loadSection() {
+    private fun loadGallery() {
         imgurRepo.getGallery(section)
             .subscribe(
                 { data ->
@@ -53,7 +53,10 @@ class MasterViewModel @Inject constructor(
                     items.addAll(data.data)
                     onImagesLoaded()
                 },
-                { t -> _state.onNext(MasterState.Error(t.message ?: "err")) }
+                { t ->
+                    val message = t.message ?: stringProvider.getString(R.string.unknown_error)
+                    _state.onNext(MasterState.Error(message))
+                }
             )
             .bindToViewModel()
     }
