@@ -16,7 +16,7 @@ data class RawImgurItem(
     val description: String? = null,
     val width: Int = 0,
     val height: Int = 0,
-    val link: String,
+    val link: String = "",
     val ups: Int? = null,
     val downs: Int? = null,
     @SerialName("favorite_count") val favorites: Int? = null,
