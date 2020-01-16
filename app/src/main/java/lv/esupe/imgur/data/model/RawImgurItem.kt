@@ -12,17 +12,43 @@ data class RawImgurItem(
     val width: Int = 0,
     val height: Int = 0,
     val link: String,
+    val ups: Int? = null,
+    val downs: Int? = null,
+    @SerialName("favorite_count") val favorites: Int? = null,
+    val views: Int? = null,
     @SerialName("is_album") val isAlbum: Boolean = false,
+    @SerialName("account_url") val accountName: String? = null,
     val cover: String? = null,
     @SerialName("cover_width") val coverWidth: Int = 0,
     @SerialName("cover_height") val coverHeight: Int = 0,
     val images: List<RawImgurItem> = emptyList()
 ) {
-    fun toModel(): ImgurItem =
-        if (isAlbum) {
-            val modelImages = images.map { it.toModel() }.filterIsInstance<ImgurItem.Image>()
-            ImgurItem.Album(id, title, description, cover, coverWidth, coverHeight, modelImages)
-        } else {
-            ImgurItem.Image(id, title, description, width, height, link)
-        }
+    fun toModel(): ImgurItem = if (isAlbum) toAlbum() else toImage()
+
+    private fun toAlbum(): ImgurItem.Album {
+        val modelImages = images.map { it.toModel() }.filterIsInstance<ImgurItem.Image>()
+        return ImgurItem.Album(
+            id = id,
+            title = title,
+            author = accountName.orEmpty(),
+            upvotes = ups ?: 0,
+            downvotes = downs ?: 0,
+            favorites = favorites ?: 0,
+            views = views ?: 0,
+            cover = cover,
+            coverWidth = coverWidth,
+            coverHeight = coverHeight,
+            images = modelImages
+        )
+    }
+
+    private fun toImage(): ImgurItem.Image =
+        ImgurItem.Image(
+            id = id,
+            title = title,
+            description = description,
+            width = width,
+            height = height,
+            link = link
+        )
 }

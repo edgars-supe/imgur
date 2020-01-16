@@ -9,4 +9,6 @@
 
     <dimen name="item_image_thumbnail_size">72dp</dimen>
     <dimen name="item_image_card_corner_radius">4dp</dimen>
+
+    <dimen name="icon_size_small">16dp</dimen>
 </resources>

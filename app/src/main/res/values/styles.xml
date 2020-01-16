@@ -2,7 +2,12 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/brand_primary</item>
         <item name="colorPrimaryDark">@color/brand_primary_dark</item>
-        <item name="colorAccent">@color/brand_accent</item>
-        <item name="android:windowBackground">@color/brand_secondary</item>
+        <item name="colorAccent">@color/brand_primary</item>
+        <item name="android:windowBackground">@color/grey_dark_extra</item>
+    </style>
+
+    <style name="Album.Info.Stats" parent="">
+        <item name="android:drawablePadding">@dimen/spacing_micro</item>
+        <item name="android:layout_marginStart">@dimen/spacing_mini</item>
     </style>
 </resources>

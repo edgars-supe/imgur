@@ -16,6 +16,7 @@ import lv.esupe.imgur.R
 import lv.esupe.imgur.ui.master.recycler.ItemAdapter
 import lv.esupe.imgur.ui.master.recycler.ItemDiffCallback
 import lv.esupe.imgur.utils.component
+import lv.esupe.imgur.utils.toolbarController
 import lv.esupe.imgur.utils.viewModel
 
 class MasterFragment : Fragment() {
@@ -34,6 +35,11 @@ class MasterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_master, container, false)
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        toolbarController.disableBackButton()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

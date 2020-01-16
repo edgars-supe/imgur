@@ -9,7 +9,6 @@ sealed class ImgurItem(
 ) : Parcelable {
     abstract val id: String
     abstract val title: String?
-    abstract val description: String?
     abstract val thumbnail: String
 
     /**
@@ -28,7 +27,7 @@ sealed class ImgurItem(
         /**
          * Description of the image. Optional.
          */
-        override val description: String? = null,
+        val description: String? = null,
         /**
          * Width of the image.
          */
@@ -63,9 +62,25 @@ sealed class ImgurItem(
          */
         override val title: String? = null,
         /**
-         * Description of the album. Optional.
+         * Name of the author of the album.
          */
-        override val description: String? = null,
+        val author: String,
+        /**
+         * Number of upvotes this album has received.
+         */
+        val upvotes: Int,
+        /**
+         * Number of downvotes this album has received.
+         */
+        val downvotes: Int,
+        /**
+         * Number of times this album has been favorited.
+         */
+        val favorites: Int,
+        /**
+         * Number of times this album has been viewed.
+         */
+        val views: Int,
         /**
          * ID of the cover image for an album.
          */
@@ -85,5 +100,8 @@ sealed class ImgurItem(
     ) : ImgurItem(isAlbum = true) {
         override val thumbnail: String
             get() = images.first { it.id == cover }.thumbnail
+
+        val coverLink: String
+            get() = images.first().link
     }
 }

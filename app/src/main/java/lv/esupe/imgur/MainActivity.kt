@@ -8,7 +8,7 @@ import lv.esupe.imgur.ui.album.AlbumFragment
 import lv.esupe.imgur.ui.image.ImageFragment
 import lv.esupe.imgur.ui.master.MasterFragment
 
-class MainActivity : AppCompatActivity(), Navigator {
+class MainActivity : AppCompatActivity(), Navigator, ToolbarController {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +21,11 @@ class MainActivity : AppCompatActivity(), Navigator {
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
     override fun showImage(image: ImgurItem.Image) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_container, ImageFragment.newInstance())
@@ -28,14 +33,26 @@ class MainActivity : AppCompatActivity(), Navigator {
             .commit()
     }
 
-    override fun showAlbum(image: ImgurItem.Album) {
+    override fun showAlbum(album: ImgurItem.Album) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, AlbumFragment.newInstance())
-            .addToBackStack(image.id)
+            .replace(R.id.main_container, AlbumFragment.newInstance(album))
+            .addToBackStack(album.id)
             .commit()
     }
 
     override fun returnToMaster() {
         supportFragmentManager.popBackStack()
+    }
+
+    override fun setTitle(title: String) {
+        supportActionBar?.title = title
+    }
+
+    override fun enableBackButton() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun disableBackButton() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 }

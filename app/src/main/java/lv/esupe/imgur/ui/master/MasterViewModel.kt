@@ -51,7 +51,6 @@ class MasterViewModel @Inject constructor(
     private fun ImgurItem.toListItem(): ImgurListItem {
         fun ImgurItem.getTitle(): String = when {
             title != null -> title.orEmpty()
-            description != null -> description.orEmpty()
             isAlbum -> (this as ImgurItem.Album).images.firstOrNull()?.getTitle() ?: id
             else -> id
         }

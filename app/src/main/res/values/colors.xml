@@ -3,11 +3,15 @@
     <color name="brand_primary">#85BF25</color>
     <color name="brand_primary_light">#B8F25B</color>
     <color name="brand_primary_dark">#528E00</color>
-    <color name="brand_accent">#171544</color>
-    <color name="brand_accent_light">#433B70</color>
-    <color name="brand_accent_dark">#00001E</color>
-    <color name="brand_secondary">#2E3035</color>
+    <color name="brand_secondary">#171544</color>
+    <color name="brand_secondary_light">#433B70</color>
+    <color name="brand_secondary_dark">#00001E</color>
     <color name="white">#FFFFFF</color>
+    <color name="black_30">#4B000000</color>
+    <color name="black_50">#80000000</color>
     <color name="grey">#808080</color>
     <color name="grey_dark">#474A51</color>
+    <color name="grey_dark_extra">#2E3035</color>
+    <color name="green">#85BF25</color>
+    <color name="red">#EE4444</color>
 </resources>
