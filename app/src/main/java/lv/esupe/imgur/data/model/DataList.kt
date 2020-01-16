@@ -1,4 +1,4 @@
-package lv.esupe.imgur.model
+package lv.esupe.imgur.data.model
 
 import kotlinx.serialization.Serializable
 

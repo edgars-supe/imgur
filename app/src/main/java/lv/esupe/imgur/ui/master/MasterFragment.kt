@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.fragment_master.*
 import kotlinx.android.synthetic.main.view_error.*
 import lv.esupe.imgur.Navigator
 import lv.esupe.imgur.R
-import lv.esupe.imgur.ui.master.recycler.ImageAdapter
-import lv.esupe.imgur.ui.master.recycler.ImageDiffCallback
+import lv.esupe.imgur.ui.master.recycler.ItemAdapter
+import lv.esupe.imgur.ui.master.recycler.ItemDiffCallback
 import lv.esupe.imgur.utils.component
 import lv.esupe.imgur.utils.viewModel
 
@@ -25,7 +25,7 @@ class MasterFragment : Fragment() {
     }
 
     private val viewModel by viewModel { component().masterViewModel }
-    private val adapter = ImageAdapter(ImageDiffCallback(), ::onImageClicked)
+    private val adapter = ItemAdapter(ItemDiffCallback(), ::onItemClicked)
     private var stateDisposable = Disposables.disposed()
     private var eventDisposable = Disposables.disposed()
 
@@ -50,8 +50,8 @@ class MasterFragment : Fragment() {
         eventDisposable.dispose()
     }
 
-    private fun onImageClicked(position: Int) {
-        viewModel.onImageClicked(position)
+    private fun onItemClicked(position: Int) {
+        viewModel.onItemClicked(position)
     }
 
     private fun observeState() {
@@ -98,6 +98,7 @@ class MasterFragment : Fragment() {
     private fun onEventReceived(event: MasterEvent) {
         when (event) {
             is MasterEvent.ShowImage -> (activity as? Navigator)?.showImage(event.image)
+            is MasterEvent.ShowAlbum -> (activity as? Navigator)?.showAlbum(event.album)
         }
     }
 }

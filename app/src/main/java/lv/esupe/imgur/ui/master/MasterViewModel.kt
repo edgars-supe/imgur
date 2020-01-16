@@ -4,9 +4,9 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import lv.esupe.imgur.data.ImgurRepo
-import lv.esupe.imgur.model.Image
+import lv.esupe.imgur.model.ImgurItem
 import lv.esupe.imgur.ui.BaseViewModel
-import lv.esupe.imgur.ui.master.model.ImageItem
+import lv.esupe.imgur.ui.master.model.ImgurListItem
 import javax.inject.Inject
 
 class MasterViewModel @Inject constructor(
@@ -19,14 +19,14 @@ class MasterViewModel @Inject constructor(
     private val _state: BehaviorSubject<MasterState> =
         BehaviorSubject.createDefault(MasterState.Loading())
     private val _events: PublishSubject<MasterEvent> = PublishSubject.create()
-    private val images: MutableList<Image> = mutableListOf()
+    private val items: MutableList<ImgurItem> = mutableListOf()
 
     init {
         imgurRepo.getGallery("hot")
             .subscribe(
                 { data ->
-                    images.clear()
-                    images.addAll(data.data)
+                    items.clear()
+                    items.addAll(data.data)
                     onImagesLoaded()
                 },
                 { t -> _state.onNext(MasterState.Error(t.message ?: "err")) }
@@ -34,30 +34,31 @@ class MasterViewModel @Inject constructor(
             .bindToViewModel()
     }
 
-    fun onImageClicked(position: Int) {
-        val image = images[position]
-        _events.onNext(MasterEvent.ShowImage(image))
+    fun onItemClicked(position: Int) {
+        val item = items[position]
+        val event =
+            if (item.isImage) MasterEvent.ShowImage(item as ImgurItem.Image)
+            else MasterEvent.ShowAlbum(item as ImgurItem.Album)
+        _events.onNext(event)
     }
 
     private fun onImagesLoaded() {
-        val items = images.map { it.toImageItem() }
+        val items = items.map { it.toListItem() }
         val state = MasterState.Content(items)
         _state.onNext(state)
     }
 
-    private fun Image.toImageItem(): ImageItem {
-        fun Image.getTitle(): String = when {
-            title != null -> title
-            description != null -> description
-            isAlbum -> images.firstOrNull()?.getTitle() ?: id
+    private fun ImgurItem.toListItem(): ImgurListItem {
+        fun ImgurItem.getTitle(): String = when {
+            title != null -> title.orEmpty()
+            description != null -> description.orEmpty()
+            isAlbum -> (this as ImgurItem.Album).images.firstOrNull()?.getTitle() ?: id
             else -> id
         }
 
-        return ImageItem(
+        return ImgurListItem(
             id = id,
             title = getTitle(),
-            width = if (isAlbum) coverWidth else width,
-            height = if (isAlbum) coverHeight else height,
             link = thumbnail
         )
     }
