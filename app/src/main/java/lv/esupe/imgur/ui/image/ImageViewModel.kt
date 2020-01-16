@@ -28,7 +28,9 @@ class ImageViewModel @Inject constructor(
         val state = ImageState(
             title = image.title ?: stringProvider.getString(R.string.untitled),
             description = image.description,
-            link = image.link
+            link = image.link,
+            width = image.width,
+            height = image.height
         )
         _state.onNext(state)
     }

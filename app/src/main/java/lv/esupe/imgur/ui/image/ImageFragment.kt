@@ -71,6 +71,9 @@ class ImageFragment : BottomSheetDialogFragment() {
         image_description.isVisible = !state.description.isNullOrBlank()
         image_description.text = state.description
 
+        // adjust the container's height to (proportionately) match the image's height. If the image
+        // is taller than the screen, it would be pillar-boxed otherwise.
+        image_container.setAspectRatioFromDimensions(state.width, state.height)
         Glide.with(requireContext())
             .load(state.link)
             .into(image_container)
