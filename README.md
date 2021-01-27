@@ -23,6 +23,8 @@ GIFs don't load properly (still frame) or at all. Glide is supposed to be able t
 
 The UX for single-image albums could be better - doesn't make too much sense to show an intermediary view if the album contains just one image, but you'd miss out on the basic details otherwise.
 
+When going back to the main view, an error briefly flashes on screen.
+
 ## Building
 
-Since the Imgur API requires registering an app, the file containing the Client ID has not been committed to git. To get the file, contact me.
+Since the Imgur API requires registering an app, the file containing the Client ID has not been committed to git. To get the file, contact me. If you want to just look at it, [here's a video](https://drive.google.com/file/d/12ZqtbXZi8Or36_brrUb2sZRhQXro-tOc/view?usp=sharing).
